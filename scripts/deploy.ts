@@ -26,9 +26,19 @@ async function main() {
     process.exit(1);
   }
 
+  let initial_value = 100;
+
   const myCallData = new CallData(sierraCode.abi);
+  console.log(typeof(initial_value));
+  console.log(typeof(process.env.DEPLOYER_ADDRESS));
+
+  // Check if initial_value is undefined or not a number
+  if (typeof initial_value === 'undefined' || typeof initial_value !== 'number') {
+    console.error("initial_value is undefined or not a number");
+    process.exit(1); // Exit if the value is not as expected
+  }
   const constructor = myCallData.compile("constructor", {
-    initial_counter: 100,
+    initial_counter: "john",
     address:
       "0x05f7151ea24624e12dde7e1307f9048073196644aa54d74a9c579a257214b542",
     initial_owner: process.env.DEPLOYER_ADDRESS ?? "",
